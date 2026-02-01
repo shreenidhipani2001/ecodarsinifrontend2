@@ -1,0 +1,264 @@
+/*  
+      .book-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  perspective: 1800px;
+  perspective-origin: 50% 50%;
+  margin: 60px auto;
+  position: relative;
+}
+
+.book {
+  width: 760px;
+  height: 520px;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.page {
+  position: absolute;
+  width: 380px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+  border: 1px solid #e0e0e0;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.left-page {
+  left: 0;
+  transform-origin: right center;
+  border-radius: 6px 0 0 6px;
+  background: linear-gradient(to right, #fdfdfd, #ffffff);
+}
+
+.right-page {
+  right: 0;
+  transform-origin: left center;
+  border-radius: 0 6px 6px 0;
+}
+
+.page-content {
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.product-placeholder {
+  width: 220px;
+  height: 220px;
+  background: linear-gradient(135deg, #f0f4ff, #e6ecff);
+  border-radius: 16px;
+  border: 2px dashed #a3bffa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #64748b;
+}
+ 
+.flipping-page {
+  width: 380px;
+  z-index: 10;
+  transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform-origin: left center;
+}
+
+.flipping-page.next    { left: 380px; transform: rotateY(0deg); }
+.flipping-page.prev    { right: 380px; transform: rotateY(0deg); transform-origin: right center; }
+
+.flipping-page.next.flip-forward   { transform: rotateY(-180deg); }
+.flipping-page.prev.flip-backward  { transform: rotateY(180deg); }
+
+ 
+.right-page.flip-forward  { transform: rotateY(-10deg) scale(0.98); opacity: 0.7; }
+.right-page.flip-backward { transform: rotateY(10deg) scale(0.98); opacity: 0.7; }
+
+.backface {
+  transform: rotateY(180deg);
+}
+
+ 
+.nav-btn {
+  font-size: 2.2rem;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: #2563eb;
+  transform: scale(1.1);
+}
+
+.nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}  
+       */
+
+
+
+
+       /* Container */
+.book-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 100vh;
+  background: #f4f4f5;
+  perspective: 2000px;
+}
+
+/* Navigation buttons */
+.nav-btn {
+  font-size: 28px;
+  padding: 10px 16px;
+  border: none;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Book */
+.book {
+  position: relative;
+  width: 700px;
+  height: 420px;
+  display: flex;
+  transform-style: preserve-3d;
+}
+
+/* Page base */
+.page {
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  position: relative;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* Left & right positioning */
+.left-page {
+  border-right: none;
+}
+
+.right-page {
+  border-left: none;
+  transform-origin: left center;
+}
+
+/* Page content */
+.page-content {
+  padding: 24px;
+}
+
+.page-content h2 {
+  margin-bottom: 12px;
+}
+
+.product-placeholder {
+  height: 180px;
+  background: linear-gradient(135deg, #ddd, #bbb);
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+
+/* Empty page */
+.empty-page {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+}
+
+/* Turning state */
+.book.turning {
+  pointer-events: none;
+}
+
+/* Right page flip animation */
+.right-page.flip-forward {
+  animation: flipForward 0.9s ease-in-out forwards;
+}
+
+.right-page.flip-backward {
+  animation: flipBackward 0.9s ease-in-out forwards;
+}
+
+/* Actual flipping page */
+.flipping-page {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  z-index: 10;
+  background: white;
+}
+
+.flipping-page.next {
+  animation: flipForward 0.9s ease-in-out forwards;
+}
+
+.flipping-page.prev {
+  animation: flipBackward 0.9s ease-in-out forwards;
+}
+
+/* Front / Back faces */
+.flipping-page .front,
+.flipping-page .back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.flipping-page .back {
+  transform: rotateY(180deg);
+}
+
+/* Keyframes */
+@keyframes flipForward {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+@keyframes flipBackward {
+  0% {
+    transform: rotateY(-180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+

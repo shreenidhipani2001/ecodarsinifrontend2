@@ -1,0 +1,30 @@
+{
+  "name": "ecodarshini",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "lucide-react": "^0.562.0",
+    "next": "14.2.5",
+    "next-cloudinary": "^6.17.5",
+    "pnpm": "^10.28.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hot-toast": "^2.6.0",
+    "react-pageflip": "^2.0.3",
+    "zustand": "^5.0.10"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "25.0.8",
+    "@types/react": "19.2.8",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.5",
+    "tailwindcss": "^4.0.0"
+  }
+}
